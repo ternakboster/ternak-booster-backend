@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ternak Booster</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%; font-family: Arial, sans-serif;
+      overflow-x: hidden; background: black; color: #cfcfcf;
+    }
+    canvas#matrix {
+      position: fixed; top: 0; left: 0; z-index: -1;
+    }
+    header {
+      background-color: rgba(0, 0, 0, 0.8);
+      text-align: center; padding: 20px 10px;
+      border-bottom: 2px solid #0f0;
+    }
+    header img {
+      width: 100px; cursor: pointer;
+    }
+    h1 {
+      color: #0f0; font-size: 2rem; margin-top: 10px;
+    }
+    .menu-container {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 30px 15px;
+    }
+    .menu-item {
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 1px solid #333; border-left: 5px solid #0f0;
+      width: 90%; max-width: 500px; margin: 15px 0;
+      padding: 15px; border-radius: 10px;
+      display: flex; align-items: center; gap: 15px;
+      transition: transform 0.2s ease; cursor: pointer;
+    }
+    .menu-item:hover {
+      transform: scale(1.03);
+      background-color: rgba(20, 20, 20, 0.8);
+    }
+    .menu-item img {
+      width: 40px; height: 40px;
+    }
+    .menu-text h3 {
+      color: #0f0; margin: 0;
+    }
+    .menu-text p {
+      font-size: 0.9rem; color: #ccc;
+    }
+    #loginPanel {
+      display: none; text-align: center; padding: 20px;
+      background-color: rgba(0, 0, 0, 0.8); border-top: 1px solid #333;
+    }
+    #loginPanel input {
+      padding: 10px; width: 200px; margin-bottom: 10px;
+      border-radius: 5px; border: none;
+    }
+    #loginPanel button {
+      padding: 10px 20px; background-color: #0f0;
+      color: #000; border: none; border-radius: 5px; cursor: pointer;
+    }
+    #loginError {
+      color: red; margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<div style="text-align: center; padding: 8px 10px; font-size: 13px; color: #fff; background-color: #222; position: sticky; top: 0; z-index: 1000;">
+    © 2025 <strong>Bang John</strong> · Ternak-Boost v1.0 · Made with ❤️ in Indonesia
+</div>
+<canvas id="matrix"></canvas>
+<header>
+  <img src="ternakbooster.png" alt="Logo Ternak Booster" id="logo" />
+  <!-- Terminal-style welcome with typewriter effect -->
+<div style="background-color: #000; color: #00FF00; font-family: 'Courier New', monospace; padding: 40px 20px; text-align: center;">
+    <h2 id="welcomeText" style="font-size: 24px; white-space: nowrap; overflow: hidden; border-right: 2px solid #00FF00; display: inline-block;">
+        <!-- text akan diketik otomatis -->
+    </h2>
+    <p style="color: #39FF14; font-size: 16px; margin-top: 10px;">
+        Automate your growth. Boost smarter, grow faster.
+    </p>
+</div>
+
+<script>
+    // Typewriter effect
+    const text = "Welcome to Ternak-Booster";
+    let i = 0;
+    const speed = 100; // ms
+
+    function typeWriter() {
+        if (i < text.length) {
+            document.getElementById("welcomeText").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+        } else {
+            document.getElementById("welcomeText").style.borderRight = "none";
+        }
+    }
+
+    window.onload = typeWriter;
+</script>
+</header><div id="loginPanel">
+  <h2 style="color: #0f0;">Login Admin</h2>
+  <input type="password" id="adminPass" placeholder="Masukkan password"><br>
+  <button onclick="checkLogin()">Login</button>
+  <p id="loginError"></p>
+</div><div class="menu-container">
+  <div class="menu-item" onclick="location.href='bot-follow-x.html'">
+    <img src="x.png" alt="Logo X" />
+    <div class="menu-text">
+      <h3>Booster Follow X.com</h3>
+      <p>Perbanyak followers akun X (Twitter) kamu secara cepat dan otomatis.</p>
+    </div>
+  </div>
+  <div class="menu-item" onclick="location.href='bot-like-x.html'">
+    <img src="x.png" alt="Logo X" />
+    <div class="menu-text">
+      <h3>Booster Like X.com</h3>
+      <p>Tingkatkan jumlah like pada postingan X.com kamu dengan mudah.</p>
+    </div>
+  </div>
+  <div class="menu-item" onclick="location.href='bot-follow-instagram.html'">
+    <img src="instagram.png" alt="Logo Instagram" />
+    <div class="menu-text">
+      <h3>Booster Follow Instagram</h3>
+      <p>Naikkan followers Instagram kamu menggunakan sistem auto-follower.</p>
+    </div>
+  </div>
+  <div class="menu-item" onclick="location.href='bot-like-instagram.html'">
+    <img src="instagram.png" alt="Logo Instagram" />
+    <div class="menu-text">
+      <h3>Booster Like Instagram</h3>
+      <p>Dapatkan lebih banyak like untuk setiap postingan Instagram-mu.</p>
+    </div>
+  </div>
+  <div class="menu-item" onclick="location.href='bot-follow-facebook.html'">
+    <img src="facebook.png" alt="Logo Facebook" />
+    <div class="menu-text">
+      <h3>Booster Follow Facebook</h3>
+      <p>Otomatiskan peningkatan pengikut Facebook pribadi atau halaman.</p>
+    </div>
+  </div>
+  <div class="menu-item" onclick="location.href='bot-like-facebook.html'">
+    <img src="facebook.png" alt="Logo Facebook" />
+    <div class="menu-text">
+      <h3>Booster Like Facebook</h3>
+      <p>Tambah jumlah like pada status, foto, dan konten Facebook kamu.</p>
+    </div>
+  </div>
+</div><script>
+// Background efek Matrix
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+const letters = "01";
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+const drops = Array.from({ length: columns }).fill(1);
+function drawMatrix() {
+  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#0f0";
+  ctx.font = fontSize + "px monospace";
+  for (let i = 0; i < drops.length; i++) {
+    const text = letters[Math.floor(Math.random() * letters.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    if (drops[i] * fontSize > canvas.height || Math.random() > 0.975) {
+      drops[i] = 0;
+    }
+    drops[i]++;
+  }
+}
+setInterval(drawMatrix, 33);
+
+// Login klik logo 5x
+let clickCount = 0;
+document.getElementById('logo').addEventListener('click', () => {
+  clickCount++;
+  if (clickCount >= 5) {
+    document.getElementById('loginPanel').style.display = 'block';
+    clickCount = 0;
+  }
+  setTimeout(() => { clickCount = 0 }, 3000);
+});
+
+function checkLogin() {
+  const password = document.getElementById("adminPass").value;
+  if (password === "admin123") {
+    alert("Login berhasil!");
+    window.location.href = "admin-panel.html";
+  } else {
+    document.getElementById("loginError").innerText = "Password salah!";
+  }
+}
+</script></body>
+</html>

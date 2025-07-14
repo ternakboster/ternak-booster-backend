@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bot Follow X</title>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBtCdd79nbJ5xxq0cyKjKdpmkCs8QC0-AQ",
+      authDomain: "ternak-booster.firebaseapp.com",
+      databaseURL: "https://ternak-booster-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "ternak-booster",
+      storageBucket: "ternak-booster.appspot.com",
+      messagingSenderId: "339056403743",
+      appId: "1:339056403743:web:62e43a2d5a224b81147c2a"
+    };
+    firebase.initializeApp(firebaseConfig);
+    window.db = firebase.database();
+  </script>
+  <script src="bot-follow-x.js" defer></script>
+  <style>
+    body { font-family: Arial; background: #0f0f0f; color: #0f0; padding: 20px; }
+    input, button { padding: 10px; width: 100%; margin-top: 10px; }
+    .log { white-space: pre-wrap; background: #111; padding: 10px; margin-top: 20px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h1>🔁 Bot Auto Follow X</h1>
+  <input type="text" id="targetUsername" placeholder="Username target (tanpa @)" />
+  <button onclick="startFollow()">🚀 Mulai Follow</button>
+  <div class="log" id="logBox">Log akan muncul di sini...</div>
+</body>
+</html>

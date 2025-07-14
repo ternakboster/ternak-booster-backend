@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel - Ternak Booster</title>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <!-- Konfigurasi Firebase langsung -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBtCdd79nbJ5xxq0cyKjKdpmkCs8QC0-AQ",
+      authDomain: "ternak-booster.firebaseapp.com",
+      databaseURL: "https://ternak-booster-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "ternak-booster",
+      storageBucket: "ternak-booster.appspot.com",
+      messagingSenderId: "339056403743",
+      appId: "1:339056403743:web:62e43a2d5a224b81147c2a"
+    };
+    firebase.initializeApp(firebaseConfig);
+    window.db = firebase.database(); // penting agar admin.js bisa akses
+  </script>
+
+  <!-- Script Admin -->
+  <!-- Script Admin -->
+<script src="admin.js" defer></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0f0f0f;
+      color: #0f0;
+      padding: 30px;
+    }
+    form {
+      max-width: 500px;
+      margin: auto;
+      background: #111;
+      padding: 20px;
+      border-radius: 10px;
+      border: 2px solid #0f0;
+    }
+    label, select, input, button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+    }
+    button {
+      background: #0f0;
+      color: black;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+    .status {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tambah Akun Tumbal</h1>
+  <form id="akunForm">
+    <label for="platform">Platform:</label>
+    <select id="platform" required>
+      <option value="">Pilih platform</option>
+      <option value="x">X.com</option>
+      <option value="instagram">Instagram</option>
+      <option value="facebook">Facebook</option>
+    </select>
+
+    <label for="cookie">Data Cookie / Session:</label>
+    <input type="text" id="cookie" placeholder="Tempelkan data sesi atau token" required>
+
+    <button type="submit">Simpan Akun</button>
+  </form>
+
+  <div class="status" id="statusMsg"></div>
+
+  <div style="text-align:center; margin-top:30px;">
+    <button onclick="exportJSON()">📤 Export JSON</button>
+    <button onclick="exportTXT()">📤 Export TXT</button>
+    <input type="file" id="importFile" accept=".json" onchange="importFile()" style="margin-top:10px;">
+  </div>
+
+  <div id="akunList" style="margin-top:40px;"></div>
+</body>
+</html>
