@@ -4,7 +4,13 @@ const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
 
 const app = express();
-app.use(cors());
+
+// ✅ Perbaikan CORS untuk Firebase Hosting
+app.use(cors({
+  origin: 'https://ternak-booster.web.app',
+  credentials: true
+}));
+
 app.use(bodyParser.json());
 
 // Route untuk Follow
@@ -16,10 +22,10 @@ app.post("/follow", async (req, res) => {
     const userRes = await fetch(`https://api.twitter.com/1.1/users/show.json?screen_name=${username}`, {
       method: "GET",
       headers: {
-        "Authorization": "Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAvq%2Fusn0wW9j%2B7YA%2FbW5VpT7k0g8%3DXXXXXXXXXXXXXXXXXXXX",  // Ganti dengan Bearer Token kamu
+        "Authorization": "Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAvq%2Fusn0wW9j%2B7YA%2FbW5VpT7k0g8%3DXXXXXXXXXXXXXXXXXXXX",
         "cookie": cookie,
         "x-csrf-token": ct0,
-        "user-agent": "Mozilla/5.0" // User-agent untuk menghindari blokir dari Twitter
+        "user-agent": "Mozilla/5.0"
       }
     });
     const user = await userRes.json();
@@ -32,7 +38,7 @@ app.post("/follow", async (req, res) => {
     const followRes = await fetch(`https://api.twitter.com/1.1/friendships/create.json`, {
       method: "POST",
       headers: {
-        "Authorization": "Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAvq%2Fusn0wW9j%2B7YA%2FbW5VpT7k0g8%3DXXXXXXXXXXXXXXXXXXXX", // Ganti dengan Bearer Token kamu
+        "Authorization": "Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAvq%2Fusn0wW9j%2B7YA%2FbW5VpT7k0g8%3DXXXXXXXXXXXXXXXXXXXX",
         "cookie": cookie,
         "x-csrf-token": ct0,
         "content-type": "application/json",
